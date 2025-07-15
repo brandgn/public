@@ -1,0 +1,82 @@
+{% comment %}
+ EComposer (https://ecomposer.io)
+ You SHOULD NOT modify source code in this page because
+ It is automatically generated from EComposer
+ At 2023-08-15 14:55:44
+ {% endcomment %} 
+ 
+ {% assign ecom_root_url = routes.root_url %}
+ {% if ecom_root_url != '/'%}
+ {% assign ecom_root_url = routes.root_url | append: '/' %}
+ {% endif %}
+ <link rel="stylesheet" media="print" onload="this.media='all'" id="ecom-vendors-modal_css" href="https://cdn.ecomposer.app/vendors/css/ecom_modal.css" /><link rel="stylesheet" media="all" id="ecom-vendors-css_ecomposer_base" href="https://cdn.ecomposer.app/vendors/css/ecom-base.css?v=1.5" /><noscript><link rel="stylesheet" media="all" onload="this.media='all'" id="ecom-vendors-modal_css" href="https://cdn.ecomposer.app/vendors/css/ecom_modal.css" /><link rel="stylesheet" media="all" id="ecom-vendors-css_ecomposer_base" href="https://cdn.ecomposer.app/vendors/css/ecom-base.css?v=1.5" /></noscript><script type="text/javascript" asyc="async" id="ecom-vendors-modal_js" src="https://cdn.ecomposer.app/vendors/js/ecom_modal.js" ></script>
+{%- assign headless = true -%}{%- render "ecom_theme_helper" -%}{%capture section_id %}ecom-preview-page-page{% endcapture%}{% if section and section_id == section.id and headless == true %}
+{{ content_for_header }}
+{% render 'ecom_header', ECOM_THEME: true %}{% endif %}<link href="https://fonts.googleapis.com/css?family=Quicksand:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Inter:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Roboto+Mono:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"/>
+{{'ecom-preview-template-page.css' | asset_url | stylesheet_tag }}
+<script src="{{'ecom-preview-template-page.js' | asset_url }}" defer="defer"></script>
+<script type="text/javascript" class="ecom-page-info">
+ window.EComposer = window.EComposer || {};
+ window.EComposer.TEMPLATE_ID="preview-template-page";
+ window.EComposer.PAGE = {"template_id":"preview-template-page","title":"X","type":"page","slug":"ecom-preview-page","plan_id":1};
+ </script>
+<div class="ecom-builder" id="ecom-preview-page"><div class="ecom-sections" data-section-id="{{section.id}}"><section class="ecom-row ecom-core ecom-section ecom-2yt1zozckdh" data-id="ecom-2yt1zozckdh" style="z-index: inherit;"><div data-deep="1" class="core__row--columns"><div class="ecom-column ecom-core core__column--first core__column--last ecom-5k75t3e3fcg" style="border: 1px dashed rgba(var(--text-color), .0);"><div class="core__column--wrapper"><div class="core__blocks" index="0"><div class="core__blocks--body"><div class="ecom-block ecom-core core__block elmspace ecom-mz2b2zgqlh" data-core-is="block"><div class="ecom-element ecom-base-image" deep="1"><figure><div class="ecom-container-image ecom-image-align"><div class="ecom-image-content-position ecom-image-default ecom-base-image-container-overlay"><picture class="ecom-image-picture"><img loading="lazy" src="https://cdn.shopify.com/s/files/1/0237/3169/9789/files/LOGO8DIV.png?v=1691924373" alt="LOGO8DIV" width="1284" height="580" style=""></picture></div></div></figure></div></div></div></div></div><div class="ecom-column__overlay"><div class="ecom-overlay"></div></div></div></div><div class="ecom-section__overlay"><div class="ecom-overlay"></div></div></section><section class="ecom-row ecom-core ecom-section ecom-section__video-bg ecom-j1jndqn28e" data-id="ecom-j1jndqn28e" style="z-index: inherit;"><div data-deep="1" class="core__row--columns"><div class="ecom-column ecom-core core__column--first core__column--last ecom-6tzlbwed7mf" style="border: 1px dashed rgba(var(--text-color), .0);"><div class="core__column--wrapper"><div class="core__blocks" index="0"><div class="core__blocks--body"><div class="ecom-block ecom-core core__block elmspace ecom-fuy1ycp33sr" data-core-is="block"><div class="ecom-element ecom-shopify-elements ecom__form" deep="1"><div class="ecom__form-wrapper"><div class="ecom__form-container">{%- comment-%}<form id="ecom-contact-form-ecom-fuy1ycp33sr" class="ecom__form">{%- endcomment -%}{% form 'contact', class: 'ecom-contact-form', id: 'ecom-contact-form-ecom-fuy1ycp33sr', data-ec-tracking-id: 'undefined' %}<div class="ecom__form-fields"><div class="ecom__form-field ecom-html" style="width: calc(50% - 8px);"><label for="contact[name]" class="ecom__form-field-label"><span>{{ 'sections.ecom-preview-page-page.name0_label_fuy1ycp33sr_html' | t }}</span><span class="ecom__form-field-required">* </span></label><input type="text" name="contact[name]" class="ecom__form--input ecom__form-text" required="" id="ecom-contact-name-0" placeholder="{{ 'sections.ecom-preview-page-page.name0_placeholder_fuy1ycp33sr_html' | t }}"></div><div class="ecom__form-field ecom-html" style="width: calc(50% - 8px);"><label for="contact[first_name]" class="ecom__form-field-label"><span>{{ 'sections.ecom-preview-page-page.first_name1_label_fuy1ycp33sr_html' | t }}</span><span class="ecom__form-field-required">* </span></label><input type="text" name="contact[first_name]" class="ecom__form--input ecom__form-text" required="" id="ecom-contact-first_name-1" placeholder="{{ 'sections.ecom-preview-page-page.first_name1_placeholder_fuy1ycp33sr_html' | t }}"></div><div class="ecom__form-field ecom-html" style="width: 100%;"><label for="contact[email]" class="ecom__form-field-label"><span>{{ 'sections.ecom-preview-page-page.email2_label_fuy1ycp33sr_html' | t }}</span><span class="ecom__form-field-required">* </span></label><input type="email" name="contact[email]" class="ecom__form--input ecom__form-email" required="" id="ecom-contact-email-2" placeholder=""></div></div><div class="ecom__form-action"><button class="ecom__form-button"><span class="ecom_form-submit--icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M480 256h-160c-17.67 0-32 14.33-32 32v160c0 17.67 14.33 32 32 32h160c17.67 0 32-14.33 32-32V288C512 270.3 497.7 256 480 256zM464 432h-128v-128h128V432zM320 192h96c17.6 0 32-14.4 32-32V64c0-17.6-14.4-32-32-32h-96c-17.6 0-32 14.4-32 32v96C288 177.6 302.4 192 320 192zM336 80h64v64h-64V80zM145.6 39.37c-9.062-9.82-26.19-9.82-35.25 0L14.38 143.4c-9 9.758-8.406 24.96 1.344 33.94C20.35 181.7 26.19 183.8 32 183.8c6.469 0 12.91-2.594 17.62-7.719L104 117.1v338.9C104 469.2 114.8 480 128 480s24-10.76 24-24.02V117.1l54.37 58.95C215.3 185.8 230.5 186.5 240.3 177.4C250 168.4 250.6 153.2 241.6 143.4L145.6 39.37z"></path></svg></span><span class="ecom_form-submit--text">{{ 'sections.ecom-preview-page-page.button_title_fuy1ycp33sr_html' | t }}</span></button></div><div>
+ {%- if form.posted_successfully? or EComBuilderMode == true -%}
+ <div class="ecom__form-success" {% unless EComBuilderMode %}tabindex="-1" autofocus{% endunless%}>
+ {{ 'sections.ecom-preview-page-page.success_message_fuy1ycp33sr_html' | t }}
+ </div>
+ {% endif %}
+ {%- if form.errors or EComBuilderMode == true -%}
+ <div class="ecom__form-message">
+ <h2 class="ecom__form-status" role="alert" {% unless EComBuilderMode %}tabindex="-1" autofocus{% endunless%}>
+ {{ 'sections.ecom-preview-page-page.error_title_fuy1ycp33sr_html' | t }}
+ </h2>
+ </div>
+ <ul class="ecom__form-status-list" role="list">
+ {% for field in form.errors %}
+ <li class="ecom__form-status-error">
+ {% if field == 'form' %}
+ {{ form.errors.messages[field] }}
+ {% else %}
+ {{ form.errors.translated_fields[field] }} - {{ form.errors.messages[field] }}
+ {% endif %}
+ </li>
+ {% endfor %}
+ {% if EComBuilderMode %}
+ <li class="ecom__form-status-error">
+ This is sample text when email invalid
+ </li>
+ {% endif %}
+ </ul>
+ {%- endif -%}
+ </div>{% endform %}{%- comment-%}</form>{%- endcomment-%}</div></div></div></div></div></div></div><div class="ecom-column__overlay"><div class="ecom-overlay"></div></div></div></div><div class="ecom-section__overlay"><div class="ecom-video-background-youtube-wrapper"><div class="ecom-video-background-youtube"><iframe class="ecom-video-background" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" src="https://www.youtube.com/embed/WGR6_bRIp84?version=3?&amp;start=1&amp;end=51&amp;controls=0&amp;mute=0&amp;showinfo=0&amp;iv_load_policy=3&amp;playlist=WGR6_bRIp84&amp;autoplay=1&amp;loop=1" style="border: 0px; width: 100%; height: 100% !important;"></iframe></div></div><div class="ecom-overlay"></div></div></section>
+</div></div>
+{% schema %}
+{
+ "name": "X",
+ "locales": {
+ "en": {
+ "success_message_fuy1ycp33sr_html": "We might be in touch",
+ "error_title_fuy1ycp33sr_html": "Oops!. An error has occurred",
+ "name0_label_fuy1ycp33sr_html": "name",
+ "name0_placeholder_fuy1ycp33sr_html": "your name",
+ "first_name1_label_fuy1ycp33sr_html": "IG",
+ "first_name1_placeholder_fuy1ycp33sr_html": "@alfiesmission",
+ "email2_label_fuy1ycp33sr_html": "email",
+ "button_title_fuy1ycp33sr_html": "SUBMIT APPLICATION"
+ }
+ },
+ "settings": [
+ {
+ "type": "header",
+ "content": "The section was generated by [Ecomposer](https:\/\/ecomposer.io).",
+ "info": "\n EComposer is a Visual Page Builder app on Shopify AppStore.\n It provides 100+ pre-built templates in library,\n so you can build unlimited pages that you can imagine with it.\n "
+ },
+ {
+ "type": "header",
+ "content": "[EDIT WITH EComposer APP \u2192](https:\/\/ecomposer.app\/shop\/builder?page=page&id=preview-template-page&utm_source=theme-customize)",
+ "info": "(*You must install the app to start editing this section [Learn more](https:\/\/help.ecomposer.io\/docs\/getting-started\/installation\/))"
+ }
+ ]
+}
+{% endschema %}

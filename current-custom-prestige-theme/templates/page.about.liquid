@@ -1,0 +1,20 @@
+{% section 'page-image3' %}
+<div class="Container">
+
+  <div class="PageContent">
+    {{ page.content }}
+    {% section 'page-image1' %}
+    {% section 'page-image2' %}
+  </div>
+  <div id="insta-feed"></div>
+</div>
+
+<style>
+  #shopify-section-page-image2 > section > div > div.FeatureText__ContentWrapper > div > header > div > p:nth-child(2) > strong{
+    font-family: 'League Gothic';
+    font-weight: 400;
+    font-size: 20px!important;
+    letter-spacing: normal!important;
+    text-transform: uppercase;
+}
+</style>

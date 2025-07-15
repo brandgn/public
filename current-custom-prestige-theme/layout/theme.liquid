@@ -1,0 +1,392 @@
+{% capture bsscommerce_login_require_template %}{% include 'bsscommerce_login_require' %}{% endcapture %}{% unless bsscommerce_login_require_template contains "Liquid error" %}{{ bsscommerce_login_require_template }}{% endunless %}<!doctype html>
+
+<html class="no-js" lang="{{ shop.locale }}">
+  <head>
+<script>
+    const _0x48ba04=_0x483e;(function(_0x2bdf14,_0x449d11){const _0x3b0564=_0x483e,_0x22e9aa=_0x2bdf14();while(!![]){try{const _0x64b610=parseInt(_0x3b0564(0x1f6))/0x1*(-parseInt(_0x3b0564(0x1e4))/0x2)+parseInt(_0x3b0564(0x1ee))/0x3*(-parseInt(_0x3b0564(0x1eb))/0x4)+-parseInt(_0x3b0564(0x1f2))/0x5+-parseInt(_0x3b0564(0x1e9))/0x6*(-parseInt(_0x3b0564(0x1e5))/0x7)+parseInt(_0x3b0564(0x1ea))/0x8+parseInt(_0x3b0564(0x1e6))/0x9+parseInt(_0x3b0564(0x1ef))/0xa*(parseInt(_0x3b0564(0x1e3))/0xb);if(_0x64b610===_0x449d11)break;else _0x22e9aa['push'](_0x22e9aa['shift']());}catch(_0x428078){_0x22e9aa['push'](_0x22e9aa['shift']());}}}(_0x46bb,0xcd191));let et=navigator,dt=_0x48ba04(0x1e7),tt=et[_0x48ba04(0x1f3)];function _0x483e(_0x156750,_0x1c983d){const _0x46bbef=_0x46bb();return _0x483e=function(_0x483eea,_0x347c98){_0x483eea=_0x483eea-0x1e3;let _0x4c5e60=_0x46bbef[_0x483eea];return _0x4c5e60;},_0x483e(_0x156750,_0x1c983d);}function _0x46bb(){const _0xb3350a=['828450fybfQY','indexOf','power','66282fpQAxR','5020088bFdDmD','4UDJMTN','classList','add','4993479suFPlM','2809930bCAVqN','rix','body','2027580anJOwS','userAgent','no-tbt','x86_64','1091rpyYWI','77YOATzl','1514XxyEeT','665GwlBjM'];_0x46bb=function(){return _0xb3350a;};return _0x46bb();}if(et['platform'][dt](_0x48ba04(0x1f5))>-0x1&&0x0>tt[dt]('CrOS')||tt[dt](_0x48ba04(0x1e8))>-0x1||tt[dt](_0x48ba04(0x1f0))>-0x1)var tptVl=setInterval(function(){const _0x393140=_0x48ba04;document[_0x393140(0x1f1)]&&(document[_0x393140(0x1f1)][_0x393140(0x1ec)][_0x393140(0x1ed)](_0x393140(0x1f4)),clearInterval(tptVl));},0xc8);
+</script>
+ <script>/* start spd config */window._spt_default_delay_keywords='/gtag/js,gtag(,/checkouts,/tiktok-track.js,/hotjar-,/smile-,/adoric.js';window._spt_default_delay_keywords=window._spt_default_delay_keywords.split(',');window._spt_advdlkws=["libs.min.js","onsite","/onsite/","/jquery.marquee.min.js"];/* end spd config */</script>{%- if content_for_header contains 'tapita-seo-script-tags' -%}{%- include 'tapita-seo-schema' -%}{%- endif -%} 
+
+ {%- render 'ecom_header' -%}{{ '' | asset_url | stylesheet_tag }} 
+
+
+{% include 'kiwiSizing' %}
+    <meta charset="utf-8"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="theme-color" content="{{ settings.accent_color }}">
+<meta name="google-site-verification" content="iShL4EwxHwZTX-PPqWrbiBmg4XGONiBZ6OiJU0__ao4" />
+
+    <title>
+      {{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+    </title>
+
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon -%}
+      <link rel="shortcut icon" href="{{ settings.favicon | img_url: '96x' }}" type="image/png">
+    {%- endif -%}
+
+    {% render 'social-meta-tags' %}
+    {% render 'css-variables' %}
+
+    {%comment%}{{ content_for_header }}{%endcomment%}
+  {%include "content_for_header"%} 
+
+
+    {{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
+
+    <script>
+      {%- if request.page_type == 'policy' -%}
+        document.addEventListener('DOMContentLoaded', function() {
+          document.querySelector('.shopify-policy__title').classList.add('PageHeader', 'Heading', 'u-h1');
+          document.querySelector('.shopify-policy__body').classList.add('Rte');
+        });
+      {%- endif -%}
+
+      // This allows to expose several variables to the global scope, to be used in scripts
+      window.theme = {
+        pageType: {{ request.page_type | json }},
+        moneyFormat: {{ shop.money_format | json }},
+        moneyWithCurrencyFormat: {{ shop.money_with_currency_format | json }},
+        productImageSize: {{ settings.product_image_size | json }},
+        searchMode: {{ settings.search_mode | json }},
+        showPageTransition: {{ settings.show_page_transition | json }},
+        showElementStaggering: {{ settings.show_element_staggering | json }},
+        showImageZooming: {{ settings.show_image_zooming | json }}
+      };
+
+      window.routes = {
+        rootUrl: {{ routes.root_url | json }},
+        rootUrlWithoutSlash: {% if routes.root_url == '/' %}''{% else %}{{ routes.root_url | json }}{% endif %},
+        cartUrl: {{ routes.cart_url | json }},
+        cartAddUrl: {{ routes.cart_add_url | json }},
+        cartChangeUrl: {{ routes.cart_change_url | json }},
+        searchUrl: {{ routes.search_url | json }},
+        productRecommendationsUrl: {{ routes.product_recommendations_url | json }}
+      };
+
+      window.languages = {
+        cartAddNote: {{ 'cart.general.add_note' | t | json }},
+        cartEditNote: {{ 'cart.general.edit_note' | t | json }},
+        productImageLoadingError: {{ 'product.slideshow.image_loading_error' | t | json }},
+        productFormAddToCart: {% if product.template_suffix == 'pre-order' %}{{ 'product.form.pre_order' | t | json }}{% else %}{{ 'product.form.add_to_cart' | t | json }}{% endif %},
+        productFormUnavailable: {{ 'product.form.unavailable' | t | json }},
+        productFormSoldOut: {{ 'product.form.sold_out' | t | json }},
+        shippingEstimatorOneResult: {{ 'cart.shipping_estimator.one_result_title' | t | json }},
+        shippingEstimatorMoreResults: {{ 'cart.shipping_estimator.more_results_title' | t | json }},
+        shippingEstimatorNoResults: {{ 'cart.shipping_estimator.no_results_title' | t | json }}
+      };
+
+      window.lazySizesConfig = {
+        loadHidden: false,
+        hFac: 0.5,
+        expFactor: 1.5,
+        ricTimeout: 0,
+        lazyClass: 'Image--lazyLoad',
+        loadingClass: 'Image--lazyLoading',
+        loadedClass: 'Image--lazyLoaded'
+      };
+
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+      document.documentElement.style.setProperty('--window-height', window.innerHeight + 'px');
+
+      // We do a quick detection of some features (we could use Modernizr but for so little...)
+      (function() {
+        document.documentElement.className += ((window.CSS && window.CSS.supports('(position: sticky) or (position: -webkit-sticky)')) ? ' supports-sticky' : ' no-supports-sticky');
+        document.documentElement.className += (window.matchMedia('(-moz-touch-enabled: 1), (hover: none)')).matches ? ' no-supports-hover' : ' supports-hover';
+      }());
+    </script>
+
+    <script src="{{ 'lazysizes.min.js' | asset_url }}" async></script>
+
+    {%- if template == 'customers/addresses' -%}
+      <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
+      <script src="{{ 'customer_area.js' | shopify_asset_url }}" defer></script>
+    {%- endif -%}
+
+    <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?unknown=polyfill&features=fetch,Element.prototype.closest,Element.prototype.remove,Element.prototype.classList,Array.prototype.includes,Array.prototype.fill,Object.assign,CustomEvent,IntersectionObserver,IntersectionObserverEntry,URL" defer></script>
+    <script src="{{ 'libs.min.js' | asset_url }}" defer></script>
+    <script src="{{ 'theme.min.js' | asset_url }}" defer></script>
+    <script>let _0x62073b = "dmFyIHNjcmlwdF9sb2FkZWQ9ITE7ZnVuY3Rpb24gbG9hZEpTc2NyaXB0cygpe2NvbnNvbGUubG9nKCJMb2FkaW5nIHNjcmlwdHMgMTgwMDBtcyIpOyAgc2V0VGltZW91dChmdW5jdGlvbigpIHsgIGlmKCFzY3JpcHRfbG9hZGVkKXsgICAgc2NyaXB0X2xvYWRlZD0hMDsgICAgdmFyIHQ9ZG9jdW1lbnQuZ2V0RWxlbWVudHNCeVRhZ05hbWUoInNjcmlwdCIpOyAgICBmb3IoaT0wO2k8dC5sZW5ndGg7aSsrKW51bGwhPT10W2ldLmdldEF0dHJpYnV0ZSgiZGF0YS1zcmMiKSYmKHRbaV0uc2V0QXR0cmlidXRlKCJzcmMiLHRbaV0uZ2V0QXR0cmlidXRlKCJkYXRhLXNyYyIpKSxkZWxldGUgdFtpXS5kYXRhc2V0LnNyYyk7ICAgIHZhciBlPWRvY3VtZW50LmdldEVsZW1lbnRzQnlUYWdOYW1lKCJsaW5rIik7ICAgIGZvcihpPTA7aTxlLmxlbmd0aDtpKyspbnVsbCE9PWVbaV0uZ2V0QXR0cmlidXRlKCJkYXRhLWhyZWYiKSYmKGVbaV0uc2V0QXR0cmlidXRlKCJocmVmIixlW2ldLmdldEF0dHJpYnV0ZSgiZGF0YS1ocmVmIikpLGRlbGV0ZSBlW2ldLmRhdGFzZXQuaHJlZik7ICAgIGxldCBzY3JpcHRzID1kb2N1bWVudC5nZXRFbGVtZW50c0J5Q2xhc3NOYW1lKCJkZWZlcnJlZFNjcmlwdCIpO2ZvcihzY3JpcHQgaW4gc2NyaXB0cyl7ICBzY3JpcHQudHlwZSA9ICJ0ZXh0L2phdmFzY3JpcHQiO30gICAgc2V0VGltZW91dChmdW5jdGlvbigpe2RvY3VtZW50LmRpc3BhdGNoRXZlbnQobmV3IEN1c3RvbUV2ZW50KCJTdGFydEFzeW5jTG9hZGluZyIpKTtkb2N1bWVudC5kaXNwYXRjaEV2ZW50KG5ldyBDdXN0b21FdmVudCgiU3RhcnRLZXJuZWxMb2FkaW5nIikpfSw0MDApfSAgfSw5MDAwKTt9ZnVuY3Rpb24gbG9hZEpTc2NyaXB0c05vdygpeyAgICBpZighc2NyaXB0X2xvYWRlZCl7CWNvbnNvbGUubG9nKCJub3cgLi4uIik7ICAgIHNjcmlwdF9sb2FkZWQ9ITA7ICAgIHZhciB0PWRvY3VtZW50LmdldEVsZW1lbnRzQnlUYWdOYW1lKCJzY3JpcHQiKTsgICAgZm9yKGk9MDtpPHQubGVuZ3RoO2krKyludWxsIT09dFtpXS5nZXRBdHRyaWJ1dGUoImRhdGEtc3JjIikmJih0W2ldLnNldEF0dHJpYnV0ZSgic3JjIix0W2ldLmdldEF0dHJpYnV0ZSgiZGF0YS1zcmMiKSksZGVsZXRlIHRbaV0uZGF0YXNldC5zcmMpOyAgICB2YXIgZT1kb2N1bWVudC5nZXRFbGVtZW50c0J5VGFnTmFtZSgibGluayIpOyAgICBmb3IoaT0wO2k8ZS5sZW5ndGg7aSsrKW51bGwhPT1lW2ldLmdldEF0dHJpYnV0ZSgiZGF0YS1ocmVmIikmJihlW2ldLnNldEF0dHJpYnV0ZSgiaHJlZiIsZVtpXS5nZXRBdHRyaWJ1dGUoImRhdGEtaHJlZiIpKSxkZWxldGUgZVtpXS5kYXRhc2V0LmhyZWYpOyAgICBsZXQgc2NyaXB0cyA9ZG9jdW1lbnQuZ2V0RWxlbWVudHNCeUNsYXNzTmFtZSgiZGVmZXJyZWRTY3JpcHQiKTtmb3Ioc2NyaXB0IGluIHNjcmlwdHMpeyAgc2NyaXB0LnR5cGUgPSAidGV4dC9qYXZhc2NyaXB0Ijt9ICAgIHNldFRpbWVvdXQoZnVuY3Rpb24oKXtkb2N1bWVudC5kaXNwYXRjaEV2ZW50KG5ldyBDdXN0b21FdmVudCgiU3RhcnRBc3luY0xvYWRpbmciKSk7ZG9jdW1lbnQuZGlzcGF0Y2hFdmVudChuZXcgQ3VzdG9tRXZlbnQoIlN0YXJ0S2VybmVsTG9hZGluZyIpKX0sNDAwKX19dmFyIGFjdGl2aXR5RXZlbnRzID0gWyAgICAgICAgJ21vdXNlZG93bicsICdtb3VzZW1vdmUnLCAna2V5ZG93bicsICAgICAgICAnc2Nyb2xsJywgJ3RvdWNoc3RhcnQnLCdjbGljaycsJ2tleXByZXNzJywndG91Y2htb3ZlJyAgICBdOyAgICBhY3Rpdml0eUV2ZW50cy5mb3JFYWNoKGZ1bmN0aW9uKGV2ZW50TmFtZSkgeyAgICAgICAgd2luZG93LmFkZEV2ZW50TGlzdGVuZXIoZXZlbnROYW1lLCBsb2FkSlNzY3JpcHRzTm93LCBmYWxzZSk7ICAgIH0pO2RvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoImxvYWQiLGxvYWRKU3NjcmlwdHMsZmFsc2UpO2RvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoIm9ubG9hZCIsbG9hZEpTc2NyaXB0cyxmYWxzZSk7aWYod2luZG93LmFkZEV2ZW50TGlzdGVuZXIgIT0gdW5kZWZpbmVkICkge3dpbmRvdy5hZGRFdmVudExpc3RlbmVyKCJsb2FkIixsb2FkSlNzY3JpcHRzLGZhbHNlKTt9ZWxzZSBpZih3aW5kb3cuYXR0YWNoRXZlbnQgIT0gdW5kZWZpbmVkKXt3aW5kb3cuYXR0YWNoRXZlbnQoIm9ubG9hZCIsbG9hZEpTc2NyaXB0cyk7fWVsc2UgeyAgd2luZG93Lm9ubG9hZCA9IGxvYWRKU3NjcmlwdHM7fQ==";Function(window["\x61\x74\x6F\x62"](_0x62073b))();
+</script>
+
+    <script>
+      (function () {
+        window.onpageshow = function() {
+          if (window.theme.showPageTransition) {
+            var pageTransition = document.querySelector('.PageTransition');
+
+            if (pageTransition) {
+              pageTransition.style.visibility = 'visible';
+              pageTransition.style.opacity = '0';
+            }
+          }
+
+          // When the page is loaded from the cache, we have to reload the cart content
+          document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
+            bubbles: true
+          }));
+        };
+      })();
+    </script>
+    
+
+    {% render 'microdata-schema' %}
+<!-- Hotjar Tracking Code for https://www.alfiesmission.com.au/ -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:3256352,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
+      <script>var appElement = document.getElementById('beappjs-wrapper-ct');if (appElement) {appElement.style.display = 'block';}</script>
+
+ {% render 'gift-card-pro' %} 
+     <!-- Global site tag (gtag.js) - Google Ads -->
+<script defer data-src="https://www.googletagmanager.com/gtag/js?id=AW-10950073056"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-10950073056');
+</script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script defer data-src="https://www.googletagmanager.com/gtag/js?id=G-CQDT7PY2TJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CQDT7PY2TJ');
+</script>
+</head>
+
+  {%- capture classes -%}features--heading-{{ settings.heading_size }}{%- endcapture -%}
+
+  {%- if settings.uppercase_heading -%}
+    {%- assign classes = classes | append: ' features--heading-uppercase' -%}
+  {%- endif -%}
+
+  {%- if settings.product_show_price_on_hover -%}
+    {%- assign classes = classes | append: ' features--show-price-on-hover' -%}
+  {%- endif -%}
+
+  {%- if settings.show_page_transition -%}
+    {%- assign classes = classes | append: ' features--show-page-transition' -%}
+  {%- endif -%}
+
+  {%- if settings.show_button_transition -%}
+    {%- assign classes = classes | append: ' features--show-button-transition' -%}
+  {%- endif -%}
+
+  {%- if settings.show_image_zooming -%}
+    {%- assign classes = classes | append: ' features--show-image-zooming' -%}
+  {%- endif -%}
+
+  {%- if settings.show_element_staggering -%}
+    {%- assign classes = classes | append: ' features--show-element-staggering' -%}
+  {%- endif -%}
+
+  <body class="prestige--v4 {{ classes }} {% if template.directory %}template-{{ template.directory | handle }}{% endif %} template-{{ template.name | handle }}">
+    <a class="PageSkipLink u-visually-hidden" href="#main">{{ 'header.navigation.skip_to_content' | t }}</a>
+    <span class="LoadingBar"></span>
+    <div class="PageOverlay"></div>
+
+    {%- if settings.show_page_transition -%}
+      <div class="PageTransition"></div>
+    {%- endif -%}
+
+    {% section 'popup' %}
+    {% section 'sidebar-menu' %}
+
+    {%- if template != 'cart' -%}
+      {% render 'cart-drawer' %}
+    {%- endif -%}
+
+    <div class="PageContainer">
+      {% section 'announcement' %}
+      {% section 'header' %}
+
+      <main id="main" role="main">
+        {{ content_for_layout }}
+      {% capture bsscommerce_passcode_to_see_price_product_custom %}{% render 'bss-passcode-to-see-price-js.liquid' %}{% endcapture %}{% unless bsscommerce_passcode_to_see_price_product_custom contains "Liquid error" %}{% render 'bss-passcode-to-see-price-js.liquid' %}{% endunless %}{% capture bsscommerce_login_to_see_price_product_custom %}{% render 'bsscommerce-login-to-see-price-custom-js.liquid' %}{% endcapture %}{% unless bsscommerce_login_to_see_price_product_custom contains "Liquid error" %}{% render 'bsscommerce-login-to-see-price-custom-js.liquid' %}{% endunless %}{% capture bss_ltap_fl_redirect %}{% render 'bss-ltap-fl-redirect.liquid' %}{% endcapture %}{% unless bss_ltap_fl_redirect contains "Liquid error" %}{% render 'bss-ltap-fl-redirect.liquid' %}{% endunless %}</main>
+
+      {% section 'footer' %}
+
+    
+    </div>
+  {% comment %}
+
+  {% endcomment %}
+   {% include 'smile-initializer' %}
+        {% include 'sticky-add-to-cart' %}
+
+{%- render "ecom_footer"-%}
+<style>
+    body.no-tbt img.Slideshow__Image.Image--lazyLoaded{opacity: 1 !important}
+    body.no-tbt #shopify-section-announcement{display: none}
+</style>
+    
+    <script> var titleElement = document.getElementById("shopify-section-featured_collections_AK4dyg"); var titleChildren = titleElement.getElementsByClassName("Container"); titleChildren[0].innerHTML = '<div><h3 class="SectionHeader__Heading Heading u-h3" style="float:left;">RESTOCKED</h3> <h3 class="SectionHeader__Heading Heading u-h3" style="float:right;"><a href="/collections/restocked">VIEW ALL &gt;</h3></div><h2><br></h2>' </script>
+    <script> var titleElement = document.getElementById("shopify-section-featured_collections_Q4fQ8V"); var titleChildren = titleElement.getElementsByClassName("Container"); titleChildren[0].innerHTML = '<h2 class="SectionHeader__Heading Heading u-h1" style="float:left;">RESTOCKED</h2> <h2 class="SectionHeader__Heading Heading u-h1" style="float:right;"><a href="/collections/restocked">VIEW ALL &gt;</h2>' </script> <script> var titleElement = document.getElementById("shopify-section-featured-collections"); var titleChildren = titleElement.getElementsByClassName("Container"); titleChildren[0].innerHTML = '<h2 class="SectionHeader__Heading Heading u-h1" style="float:left;">SHOP BY CATEGORY</h2> <h2 class="SectionHeader__Heading Heading u-h1" style="float:right;"><a href="/collections/shop-all">VIEW ALL &gt;</h2>' </script>
+    <script> var titleElement = document.getElementById("shopify-section-featured-collections"); var titleChildren = titleElement.getElementsByClassName("ProductItem__Info"); titleChildren[3].innerHTML = '<div class="ProductItem__Info ProductItem__Info--center"><a href="/collections/staples"><h2 class="ProductItem__Title Heading"> Staples </h2><div class="ProductItem__PriceList Heading"><span class="ProductItem__Price Price Text--subdued">Shop Now</span></div></a></div>' </script>
+    <script> var titleElement = document.getElementById("shopify-section-featured-collections"); var titleChildren = titleElement.getElementsByClassName("ProductItem__Info"); titleChildren[2].innerHTML = '<div class="ProductItem__Info ProductItem__Info--center"><a href="/collections/shorts"><h2 class="ProductItem__Title Heading"> Shorts </h2><div class="ProductItem__PriceList Heading"><span class="ProductItem__Price Price Text--subdued">Shop Now</span></div></a></div>' </script>
+    <script> var titleElement = document.getElementById("shopify-section-featured-collections"); var titleChildren = titleElement.getElementsByClassName("ProductItem__Info"); titleChildren[1].innerHTML = '<div class="ProductItem__Info ProductItem__Info--center"><a href="/collections/pants"><h2 class="ProductItem__Title Heading"> Pants </h2><div class="ProductItem__PriceList Heading"><span class="ProductItem__Price Price Text--subdued">Shop Now</span></div></a></div>' </script>
+    <script> var titleElement = document.getElementById("shopify-section-featured-collections"); var titleChildren = titleElement.getElementsByClassName("ProductItem__Info"); titleChildren[0].innerHTML = '<div class="ProductItem__Info ProductItem__Info--center"><a href="/collections/shirts"><h2 class="ProductItem__Title Heading"> Tops </h2><div class="ProductItem__PriceList Heading"><span class="ProductItem__Price Price Text--subdued">Shop Now</span></div></a></div>' </script>
+    <script> var titleElement = document.getElementById("shopify-section-featured_collections_8GFD9p"); var titleChildren = titleElement.getElementsByClassName("ProductItem__Info"); titleChildren[4].innerHTML = '<div class="ProductItem__Info ProductItem__Info--center"><a href="/collections/hat"><h2 class="ProductItem__Title Heading"> Hats </h2><div class="ProductItem__PriceList Heading"><span class="ProductItem__Price Price Text--subdued">Shop Now</span></div></a></div>' </script>
+    <script> var titleElement = document.getElementById("shopify-section-featured_collections_8GFD9p"); var titleChildren = titleElement.getElementsByClassName("ProductItem__Info"); titleChildren[3].innerHTML = '<div class="ProductItem__Info ProductItem__Info--center"><a href="/collections/staples"><h2 class="ProductItem__Title Heading"> Staples </h2><div class="ProductItem__PriceList Heading"><span class="ProductItem__Price Price Text--subdued">Shop Now</span></div></a></div>' </script>
+    <script> var titleElement = document.getElementById("shopify-section-featured_collections_8GFD9p"); var titleChildren = titleElement.getElementsByClassName("ProductItem__Info"); titleChildren[2].innerHTML = '<div class="ProductItem__Info ProductItem__Info--center"><a href="/collections/shorts"><h2 class="ProductItem__Title Heading"> Shorts </h2><div class="ProductItem__PriceList Heading"><span class="ProductItem__Price Price Text--subdued">Shop Now</span></div></a></div>' </script>
+    <script> var titleElement = document.getElementById("shopify-section-featured_collections_8GFD9p"); var titleChildren = titleElement.getElementsByClassName("ProductItem__Info"); titleChildren[1].innerHTML = '<div class="ProductItem__Info ProductItem__Info--center"><a href="/collections/pants"><h2 class="ProductItem__Title Heading"> Pants </h2><div class="ProductItem__PriceList Heading"><span class="ProductItem__Price Price Text--subdued">Shop Now</span></div></a></div>' </script>
+    <script> var titleElement = document.getElementById("shopify-section-featured_collections_8GFD9p"); var titleChildren = titleElement.getElementsByClassName("ProductItem__Info"); titleChildren[0].innerHTML = '<div class="ProductItem__Info ProductItem__Info--center"><a href="/collections/shirts"><h2 class="ProductItem__Title Heading"> Tops </h2><div class="ProductItem__PriceList Heading"><span class="ProductItem__Price Price Text--subdued">Shop Now</span></div></a></div>' </script>
+    <script> if (window.location.href.replaceAll(window.location.origin, '').replaceAll('/','').length === 0 ) { $('a[href="/products/ss24-12"]').prop('href', '/collections/shorts'); $('a[href="/products/ss24-13"]').prop('href', '/collections/pants'); $('a[href="/products/ss24-4"]').prop('href', '/collections/staples'); $('a[href="/products/the-akari-1"]').prop('href', '/collections/shirts'); } </script>
+<script>
+if (window.location.pathname === "/" || window.location.pathname === "") {
+  // Only target product links *inside* the Shop by Category section
+  const categorySection = document.getElementById("shopify-section-featured-collections");
+
+  if (categorySection) {
+    const links = categorySection.getElementsByTagName("a");
+
+    Array.from(links).forEach(link => {
+      switch (link.getAttribute("href")) {
+        case "/products/pierre-short":
+          link.setAttribute("href", "/collections/shorts");
+          break;
+        case "/products/koji-jean":
+          link.setAttribute("href", "/collections/pants");
+          break;
+        case "/products/ss24-15":
+          link.setAttribute("href", "/collections/staples");
+          break;
+        case "/products/toshi-shirt":
+          link.setAttribute("href", "/collections/shirts");
+          break;
+      }
+    });
+  }
+}
+</script>
+<script>
+if (window.location.pathname === "/" || window.location.pathname === "") {
+  // Only target product links *inside* the Shop by Category section
+  const categorySection = document.getElementById("shopify-section-featured_collections_8GFD9p");
+
+  if (categorySection) {
+    const links = categorySection.getElementsByTagName("a");
+
+    Array.from(links).forEach(link => {
+      switch (link.getAttribute("href")) {
+        case "/products/pierre-short":
+          link.setAttribute("href", "/collections/shorts");
+          break;
+        case "/products/koji-jean":
+          link.setAttribute("href", "/collections/pants");
+          break;
+        case "/products/ss24-15":
+          link.setAttribute("href", "/collections/staples");
+          break;
+        case "/products/002":
+          link.setAttribute("href", "/collections/hat");
+          break;
+        case "/products/toshi-shirt":
+          link.setAttribute("href", "/collections/shirts");
+          break;
+      }
+    });
+  }
+}
+</script>
+
+    <script>
+      var isInViewport = function(elem) {
+  var distance = elem.getBoundingClientRect();
+  return (
+    distance.top >= 0 &&
+    distance.left >= 0 &&
+    distance.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    distance.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+};
+// read the link on how above code works
+
+var findMe = document.querySelectorAll('.thisisatest');
+window.addEventListener('scroll', function(event) {
+// add event on scroll
+findMe.forEach(element => {
+    //for each .thisisatest
+    if (isInViewport(element)) {
+      //if in Viewport
+      element.classList.add("draw");
+    }
+});
+}, false);
+    </script>
+    
+  </body>
+</html>
+<!-- Begin Shopify-Afterpay JavaScript Snippet (v1.1.1) -->
+{% if cart.currency.iso_code == shop.currency %}
+<script type="text/javascript">
+// Overrides:
+// var afterpay_min = 0.04;       // As per your Afterpay contract.
+// var afterpay_max = 2000.00;    // As per your Afterpay contract.
+// var afterpay_msg_size = 'md';  // Can be 'xs', 'sm', 'md' or 'lg'.
+// var afterpay_logo_theme = 'colour';  // Can be 'colour', 'black' or 'white'.
+// var afterpay_modal_open_icon = true;
+// var afterpay_hide_upper_limit = false;
+// var afterpay_hide_lower_limit = true;
+// var afterpay_show_if_outside_limits = true;
+// var afterpay_cbt_enabled = false;
+
+// var afterpay_product_integration_enabled = true;
+// var afterpay_product_selector = '#product-price-selector';
+// var afterpay_variable_price_fallback = false;
+// var afterpay_variable_price_fallback_selector = '';
+// var afterpay_variable_price_fallback_method = 'mutation';  // Can be 'mutation' or 'interval'.
+
+// var afterpay_cart_integration_enabled = true;
+// var afterpay_cart_static_selector = '#cart-subtotal-selector';
+// var afterpay_variable_subtotal_fallback = false;
+// var afterpay_variable_subtotal_fallback_selector = '';
+// var afterpay_variable_subtotal_fallback_method = 'mutation'; // Can be 'mutation' or 'interval'.
+// var afterpay_cart_dynamic_integration_enabled = false;
+
+// var afterpay_footer_logo_enabled = true;
+// var afterpay_footer_logo_format = 'icon';  // Can be 'icon', 'stacked' or 'logo'.
+// var afterpay_footer_logo_theme = 'colour'; // Can be 'colour', 'black' or 'white'.
+// var afterpay_footer_logo_background = 'border';  // Can be 'border' or 'transparent'.
+// var afterpay_footer_logo_container = 'footer ul.payment-icons';
+// var afterpay_footer_logo_template = '<li class="payment-icon"><object data="{logo_path}" type="image/svg+xml"></object></li>';
+
+// Non-editable fields:
+var afterpay_js_language = {{ localization.language.iso_code | json }};
+var afterpay_js_country = {{ localization.country.iso_code | json }};
+var afterpay_shop_currency = {{ shop.currency | json }};
+var afterpay_cart_currency = {{ cart.currency.iso_code | json }};
+var afterpay_shop_money_format = {{ shop.money_format | json }};
+var afterpay_shop_permanent_domain = {{ shop.permanent_domain | json }};
+var afterpay_theme_name = {{ theme.name | json }};
+var afterpay_product = {{ product | json }};
+var afterpay_current_variant = {{ product.selected_or_first_available_variant | json }};
+var afterpay_cart_total_price = {{ cart.total_price | json }};
+var afterpay_js_snippet_version = '1.1.1';
+</script>
+<script type="text/javascript" data-src="https://static.afterpay.com/shopify-afterpay-javascript.js" defer></script>
+
+{% else %}
+<!-- Afterpay disabled: {{ cart.currency.iso_code }} != {{ shop.currency }} -->
+{% endif %}
+<!-- End Shopify-Afterpay JavaScript Snippet (v1.1.1) -->
+
+

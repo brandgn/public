@@ -1,0 +1,28 @@
+{% capture redirectScript %}{% render 'bsscommerce-redirect-product-page-logic', product: product, collection: collection %}{% endcapture %}{% assign redirectScript = redirectScript | strip %}{% unless redirectScript contains "Liquid error" %}{% if redirectScript != "" %}<script id="bss-redirect" type="text/javascript">window.location.replace("{{ redirectScript }}")</script>{% endif %}{% endunless %}{% section 'product-template' %}
+{% section 'product-recommendations' %}
+{% section 'recently-viewed-products' %}
+
+<script>
+  window.ShopifyXR=window.ShopifyXR||function(){(ShopifyXR.q=ShopifyXR.q||[]).push(arguments)};
+  ShopifyXR('addModels', {{ product.media | where: 'media_type', 'model' | json }});
+</script>
+
+
+{% if shop.metafields.UCartButton.showUcartButton == "true" %}
+<!-- UCART -->
+<div id="ucProductJson" style="display:none !important" data-prd='{{ product | json | escape }}'>prddet</div>
+<input type="hidden" id="ucds"
+       data-ucDmp="{{shop.metafields.UCartButton.ucDomainPointer}}"
+       data-pguid="{{shop.metafields.UCartButton.provGuidId}}"
+       data-pvar="{{product.selected_or_first_available_variant.id}}"
+       data-ptitle="{{product.title}}"
+       data-pTestMode="{{shop.metafields.UCartButton.testMode}}"
+       data-qty="1"
+       data-btnstate="0"
+       data-shouldlog="0" />
+<link href="{{shop.metafields.UCartButton.ucCssCdn}}" rel="stylesheet" />
+<script defer src="https://cdn.ucart.com/js/uc.shpfbtn.min.js?v={{ "now" | date: "%Y%m%d" }}" type="text/javascript"></script>
+<script defer src="{{shop.metafields.UCartButton.ucJsCdn}}" type="text/javascript"></script>
+<!-- END UCART -->
+
+{% endif %}

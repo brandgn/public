@@ -1,0 +1,300 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="Container">
+    <div class="margin-auto PageContent--narrow">
+        <div class="Rte">
+            <div class="Form Form--spacingTight">
+                <div class="Form__Group">
+                    <div class="Form__Item">
+                        <input type="text" class="Form__Input" name="contact[name]" aria-label="Your name"
+                            id="name_input"
+                            placeholder="Your name" required="">
+                        <label class="Form__FloatingLabel">Your name</label>
+                    </div>
+
+                    <div class="Form__Item">
+                        <input type="email" class="Form__Input" name="contact[email]" aria-label="Your email"
+                            id="email_input"
+                            placeholder="Your email" required="">
+                        <label class="Form__FloatingLabel">Your email</label>
+                    </div>
+                </div>
+                <div class="social-signon-form">
+                    <div class="insta-default">
+                        <a class="insta-default" id="ig-login-btn" href="#"><i class="fa fa-instagram"></i>
+                        Log in with Instagram
+                        </a>
+                    </div>
+                    <span class="ig-manual-notice">
+                        Or Manually enter your Instagram username
+                    </span>
+                </div>
+                <div class="Form__Item" style="margin-top:10px">
+                  <input type="text" class="Form__Input" name="contact[instagram]" aria-label="Your IG Handle"
+                      id="instagram_handle"
+                      placeholder="@alfiesmission" required="">
+                  <label class="Form__FloatingLabel">Instagram Handle</label>
+              </div>
+                <button id="submit-application-btn" type="nothing" class="Form__Submit Button Button--primary Button--full">Submit Application</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // on load
+    document.addEventListener('DOMContentLoaded', function () {
+        var emailInput = document.getElementById('email_input');
+        var emailValue = emailInput.value;
+        var nameInput = document.getElementById('name_input');
+        var nameValue = nameInput.value;
+        var codeValue = '';
+        var igProfile = {};
+        //name and email input watcher
+        nameInput.addEventListener('input', function (e) {
+            nameValue = e.target.value;
+            var url = new URL("https://api.instagram.com/oauth/authorize");
+            var params = {
+                client_id: "1147806779459608",
+                redirect_uri: "https://alfies.atlanticpanel.com/oauth",
+                scope: "user_profile,user_media",
+                response_type: "code",
+                state: `name=${nameValue}&email=${document.getElementById('email_input').value}`
+            }
+            Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+            console.log(url.href);
+
+            var igLoginBtn = document.getElementById('ig-login-btn');
+            igLoginBtn.href = url.href;
+        });
+        emailInput.addEventListener('input', function (e) {
+            emailValue = e.target.value;
+            var url = new URL("https://api.instagram.com/oauth/authorize");
+            var params = {
+                client_id: "1147806779459608",
+                redirect_uri: "https://alfies.atlanticpanel.com/oauth",
+                scope: "user_profile,user_media",
+                response_type: "code",
+                state: `name=${document.getElementById('name_input').value}&email=${emailValue}`
+            }
+            Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+            console.log(url.href);
+
+            var igLoginBtn = document.getElementById('ig-login-btn');
+            igLoginBtn.href = url.href;
+        });
+
+        const urlParams = new URLSearchParams(window.location.search);
+        if (window.location.href.includes('code')) {
+            const code = urlParams.get('code');
+            codeValue = code;
+            const name = urlParams.get('state').split('&')[0].split('=')[1];
+            const email = urlParams.get('state').split('&')[1].split('=')[1];
+            nameInput.value = name;
+            emailInput.value = email;
+            fetch(`https://alfies.atlanticpanel.com/forms/instagram/auth?code=${code}&redirect_uri=` + "https://alfies.atlanticpanel.com/oauth")
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.id) {
+                        igProfile = data;
+                        var igSocialButton = document.getElementById('ig-login-btn');
+                        igSocialButton.innerHTML = `<i class="fa fa-instagram"></i> Logged in as ${data.username}`;
+                        igSocialButton.style.backgroundColor = '#E33E5C';
+                        igSocialButton.style.pointerEvents = 'none';
+                        var igManualNotice = document.querySelector('.ig-manual-notice');
+                        igManualNotice.style.display = 'none';
+                        var igHandleInput = document.getElementById('instagram_handle');
+                        //fill in the ig handle input and disable it
+                        igHandleInput.value = data.username;
+                        igHandleInput.disabled = true;
+                        
+                    }
+                });
+        }
+        var url = new URL("https://api.instagram.com/oauth/authorize");
+        var params = {
+            client_id: "1147806779459608",
+            redirect_uri: "https://alfies.atlanticpanel.com/oauth",
+            scope: "user_profile,user_media",
+            response_type: "code",
+            state: `name=${document.getElementById('name_input').value}&email=${document.getElementById('email_input').value}`
+        }
+        Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+
+        document.getElementById('ig-login-btn').href = url.href
+        var submitApplicationBtn = document.getElementById('submit-application-btn');
+        submitApplicationBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (igProfile.id) {
+                fetch('https://www.alfiesmission.com.au/community/socials/forms/shopify', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: document.getElementById('name_input').value,
+                        email: document.getElementById('email_input').value,
+                        igProfile: igProfile,
+                        code: codeValue
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                        if(data.message == "ok"){
+                            alert('Application submitted successfully');
+                            submitApplicationBtn.disabled = true;
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+            }else{
+                fetch('https://www.alfiesmission.com.au/community/socials/forms/shopify', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: document.getElementById('name_input').value,
+                        email: document.getElementById('email_input').value,
+                        igProfile: {
+                            username: document.getElementById('instagram_handle').value
+                        }
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                        if(data.message == "ok"){
+                            alert('Application submitted successfully');
+                            submitApplicationBtn.disabled = true;
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+            }
+        });
+    });
+</script>
+<style>
+    .margin-auto{
+        margin: auto;
+    }
+    .social-signon-form {
+
+        display: flex;
+        align-items: center;
+    }
+    .insta-default {
+        margin-right: 10px;
+    }
+    .insta-default a {
+        padding: 15px 30px !important;
+        display: block;
+        background-color: #E33E5C;
+        box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.1);
+        color: #FFF !important;
+        border-radius: 4px;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-decoration: none !important;
+        transition: all 0.3s;
+    }
+    .insta-default a:hover {
+        box-shadow: 0 0 4px 3px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s;
+    }
+    .insta-default a i {
+        color: #FFF;
+        font-size: 18px;
+        margin-right: 10px;
+    }
+</style>
+{% schema %}
+{
+  "name": "Application Form",
+  "settings": [
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Mobile text color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "1200 x 1200px .jpg recommended"
+        },
+        {
+          "type": "checkbox",
+          "id": "apply_overlay",
+          "label": "Apply overlay on image",
+          "info": "Only applied on mobile. This can improve text visibility.",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Label",
+          "default": "2000",
+          "info": "Maximum 20 characters allowed."
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Sub-heading",
+          "default": "Sub-heading"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Text",
+          "default": "<p>Add your own custom content to give more information about your store, availability details...</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Other",
+      "name": "Application Form",
+      "settings": {},
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "title": "2000"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "title": "2001"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "title": "2002"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
