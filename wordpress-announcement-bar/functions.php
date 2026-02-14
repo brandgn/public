@@ -94,6 +94,15 @@ function oz_announcement_bar_css() {
                 font-size: 12px;
                 letter-spacing: 0.8px;
             }
+
+            /* Mobile header uses absolute positioning — offset it below the bar */
+            #Top_bar {
+                top: 34px !important;
+            }
+
+            body.admin-bar #Top_bar {
+                top: 66px !important;
+            }
         }
     </style>
     <?php
