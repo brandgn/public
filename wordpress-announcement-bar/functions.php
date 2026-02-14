@@ -3,8 +3,8 @@
  * Oz Labs Announcement Bar
  *
  * A scroll-jank-free announcement bar for WordPress + BeTheme.
- * The bar sits in normal document flow above the header — no position:fixed,
- * no MutationObserver, no header manipulation.
+ * Uses position:fixed with CSS-only header offset — no MutationObserver,
+ * no JavaScript header manipulation, no spacer toggling.
  *
  * Installation: Add the contents of this file to your child theme's functions.php,
  * or include it via:
@@ -17,16 +17,37 @@ function oz_announcement_bar_css() {
     ?>
     <style id="oz-announcement-bar-css">
         #oz-announcement-bar {
-            position: relative;
-            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
             height: 34px;
             background-color: rgb(4, 60, 190);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            z-index: 10;
+            z-index: 99999;
             box-sizing: border-box;
+        }
+
+        /* Offset for WordPress admin bar */
+        body.admin-bar #oz-announcement-bar {
+            top: 32px;
+        }
+
+        /* Push page content below the fixed bar */
+        body {
+            padding-top: 34px !important;
+        }
+
+        /* When BeTheme's sticky header activates, position it below the bar (CSS only, no JS) */
+        #Top_bar.is-sticky {
+            top: 34px !important;
+        }
+
+        body.admin-bar #Top_bar.is-sticky {
+            top: 66px !important;
         }
 
         #oz-announcement-bar .oz-announce-msg {
@@ -91,13 +112,8 @@ function oz_announcement_bar_js() {
             '<span class="oz-announce-msg oz-visible" id="oz-msg-1">&#x2713;&ensp;<span class="oz-highlight">Free Delivery</span> on Orders over $199.00</span>' +
             '<span class="oz-announce-msg oz-hidden" id="oz-msg-2">&#x2713;&ensp;<span class="oz-highlight">Save More</span> with our <a class="oz-link" href="/product-category/bundles/">Value Bundles</a></span>';
 
-        // Insert before BeTheme's header wrapper (in normal document flow)
-        var header = document.getElementById('Header_wrapper');
-        if (header && header.parentNode) {
-            header.parentNode.insertBefore(bar, header);
-        } else {
-            document.body.insertBefore(bar, document.body.firstChild);
-        }
+        // Insert at top of body
+        document.body.insertBefore(bar, document.body.firstChild);
 
         // Message rotation
         var msg1 = document.getElementById('oz-msg-1');
