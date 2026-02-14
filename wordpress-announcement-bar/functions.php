@@ -17,10 +17,10 @@ function oz_announcement_bar_css() {
     ?>
     <style id="oz-announcement-bar-css">
         #oz-announcement-bar {
-            position: fixed;
+            position: -webkit-sticky;
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
+            width: 100%;
             height: 34px;
             background-color: rgb(4, 60, 190);
             display: flex;
@@ -34,11 +34,6 @@ function oz_announcement_bar_css() {
         /* Offset for WordPress admin bar */
         body.admin-bar #oz-announcement-bar {
             top: 32px;
-        }
-
-        /* Push page content below the fixed bar */
-        body {
-            padding-top: 34px !important;
         }
 
         /* When BeTheme's sticky header activates, position it below the bar (CSS only, no JS) */
@@ -93,15 +88,6 @@ function oz_announcement_bar_css() {
             #oz-announcement-bar .oz-announce-msg {
                 font-size: 12px;
                 letter-spacing: 0.8px;
-            }
-
-            /* Mobile header uses absolute positioning — offset it below the bar */
-            #Top_bar {
-                top: 34px !important;
-            }
-
-            body.admin-bar #Top_bar {
-                top: 66px !important;
             }
         }
     </style>
