@@ -85,6 +85,18 @@ function oz_announcement_bar_css() {
         }
 
         @media (max-width: 767px) {
+            /* position:sticky breaks on mobile (BeTheme sets overflow:hidden on ancestors) — use fixed */
+            #oz-announcement-bar {
+                position: fixed;
+                left: 0;
+                right: 0;
+            }
+
+            /* Push header below the fixed bar (margin-top works regardless of positioning mode) */
+            #Header_wrapper {
+                margin-top: 34px !important;
+            }
+
             #oz-announcement-bar .oz-announce-msg {
                 font-size: 12px;
                 letter-spacing: 0.8px;
